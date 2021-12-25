@@ -205,6 +205,8 @@ print_status() {
     else
         echo ""
     fi
+
+    printf "\n"
 }
 
 # A submenu for a specific device that allows connecting, pairing, and trusting
