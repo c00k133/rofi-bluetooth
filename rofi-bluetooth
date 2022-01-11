@@ -19,6 +19,8 @@
 # Constants
 divider="---------"
 goback="Back"
+COLOR_ON="${COLOR_ON:-#00CC66}"
+COLOR_OFF="${COLOR_OFF:-#FF3300}"
 
 # Checks if bluetooth controller is powered on
 power_on() {
@@ -183,7 +185,7 @@ toggle_trust() {
 # Useful for status bars like polybar, etc.
 print_status() {
     if power_on; then
-        printf ''
+        printf "%%{F$COLOR_ON}%%{F-}"
 
         mapfile -t paired_devices < <(bluetoothctl paired-devices | grep Device | cut -d ' ' -f 2)
         counter=0
@@ -206,9 +208,8 @@ print_status() {
                 ((counter++))
             fi
         done
-        printf "\n"
     else
-        echo ""
+        printf "%%{F$COLOR_OFF}%%{F-}"
     fi
 
     printf "\n"
